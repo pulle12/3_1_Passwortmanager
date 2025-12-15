@@ -1,3 +1,23 @@
+<?php
+
+require_once 'models/Credentials.php';
+
+if(empty($_GET['id'])) {
+    header('Location: index.php');
+    exit();
+} else {
+    $c = Credentials::get($_GET['id']);
+}
+
+if($c == null) {
+    http_response_code(404);
+    die();
+}
+
+print_r($c);
+
+?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -16,8 +36,8 @@
     <h2>Zugangsdaten anzeigen</h2>
 
     <p>
-        <a class="btn btn-primary" href="update.php?id=29">Aktualisieren</a>
-        <a class="btn btn-danger" href="delete.php?id=29">Löschen</a>
+        <a class="btn btn-primary" href="update.php?id=<?= $c->getId() ?>">Aktualisieren</a>
+        <a class="btn btn-danger" href="delete.php?id=<?= $c->getId() ?>">Löschen</a>
         <a class="btn btn-default" href="index.php">Zurück</a>
     </p>
 
@@ -25,19 +45,19 @@
         <tbody>
         <tr>
             <th>Name</th>
-            <td>Agivu</td>
+            <td><?= $c->getName() ?></td>
         </tr>
         <tr>
             <th>Domäne</th>
-            <td>opera.com</td>
+            <td><?= $c->getDomain() ?></td>
         </tr>
         <tr>
             <th>CMS-Benutzername</th>
-            <td>mguittes</td>
+            <td><?= $c->getCmsUsername() ?></td>
         </tr>
         <tr>
             <th>CMS-Passwort</th>
-            <td>oXPreXz</td>
+            <td><?= $c->getCmsPassword() ?></td>
         </tr>
         </tbody>
     </table>
