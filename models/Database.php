@@ -2,7 +2,7 @@
 
 class Database
 {
-    private static $dbName = 'php31';
+    private static $dbName = '3_1_passwortmanager';
     private static $dbHost = 'localhost';
     private static $dbUsername = 'root';
     private static $dbUserPassword = '';
