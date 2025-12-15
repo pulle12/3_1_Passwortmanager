@@ -148,26 +148,52 @@ class Credentials implements DatabaseObject
 
     public function create()
     {
-
+        $sql = "INSERT INTO credentials (name, domain, cms_username, cms_password) VALUES (?, ?, ?, ?)";
+        $db = Database::connect();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$this->name, $this->domain, $this->cms_username, $this->cms_password]);
+        $lastId = $db->lastInsertId();
+        Database::disconnect();
+        return $lastId;
     }
 
     public function update()
     {
-        // TODO: Implement update() method.
+        $sql = "UPDATE credentials SET name = ?, domain = ?, cms_username = ?, cms_password = ? WHERE id = ?";
+        $db = Database::connect();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$this->name, $this->domain, $this->cms_username, $this->cms_password, $this->id]);
+        Database::disconnect();
     }
 
     public static function get($id)
     {
-        // TODO: Implement get() method.
+        $sql = "SELECT * FROM credentials WHERE id = ?";
+        $db = Database::connect();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        $item = $stmt->fetchObject('Credentials'); // hier wird automatisiert, dass objektrelationale Mapping wird
+        Database::disconnect();
+        return $item !== false ? $item : null;
     }
 
     public static function getAll()
     {
-        // TODO: Implement getAll() method.
+        $sql = "SELECT * FROM credentials ORDER BY name ASC, domain ASC";
+        $db = Database::connect();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $items = $stmt->fetchAll(PDO::FETCH_CLASS,'Credentials'); // hier wird automatisiert, dass objektrelationale Mapping wird + Verwendung einer Hilfsmethode von PDO
+        Database::disconnect();
+        return $items !== false ? $items : null;
     }
 
     public static function delete($id)
     {
-        // TODO: Implement delete() method.
+        $sql = "DELETE FROM credentials WHERE id = ?";
+        $db = Database::connect();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        Database::disconnect();
     }
 }
