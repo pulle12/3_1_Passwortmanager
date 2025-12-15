@@ -137,15 +137,6 @@ class Credentials implements DatabaseObject
         return $this->errors;
     }
 
-    /**
-     * @param array $errors
-     */
-    public function setErrors($errors)
-    {
-        $this->errors = $errors;
-    }
-
-
     public function create()
     {
         $sql = "INSERT INTO credentials (name, domain, cms_username, cms_password) VALUES (?, ?, ?, ?)";

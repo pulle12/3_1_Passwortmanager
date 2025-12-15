@@ -32,46 +32,28 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Agivu</td>
-                <td>opera.com</td>
-                <td>mguittes</td>
-                <td>oXPreXz</td>
-                <td><a class="btn btn-info" href="view.php?id=29"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp;<a
-                        class="btn btn-primary" href="update.php?id=29"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;<a
-                        class="btn btn-danger" href="delete.php?id=29"><span class="glyphicon glyphicon-remove"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Browsecat</td>
-                <td>hc360.com</td>
-                <td>pdeetlefs0</td>
-                <td>mPaf0XcoXO</td>
-                <td><a class="btn btn-info" href="view.php?id=1"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp;<a
-                        class="btn btn-primary" href="update.php?id=1"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;<a
-                        class="btn btn-danger" href="delete.php?id=1"><span
-                        class="glyphicon glyphicon-remove"></span></a></td>
-            </tr>
-            <tr>
-                <td>Bubbletube</td>
-                <td>oakley.com</td>
-                <td>tstandingo</td>
-                <td>fZriVHPTyJkH</td>
-                <td><a class="btn btn-info" href="view.php?id=25"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp;<a
-                        class="btn btn-primary" href="update.php?id=25"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;<a
-                        class="btn btn-danger" href="delete.php?id=25"><span class="glyphicon glyphicon-remove"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Camimbo</td>
-                <td>ed.gov</td>
-                <td>gladdleq</td>
-                <td>6dliuMc</td>
-                <td><a class="btn btn-info" href="view.php?id=27"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp;<a
-                        class="btn btn-primary" href="update.php?id=27"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;<a
-                        class="btn btn-danger" href="delete.php?id=27"><span class="glyphicon glyphicon-remove"></span></a>
-                </td>
-            </tr>
+            <?php
+            require_once 'models/Credentials.php';
+
+            $credentials = Credentials::getAll();
+
+            foreach ($credentials as $c) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($c->getName()) . "</td>"; //htmlspecialchars im Video nicht verwendet aber wichtig gegen XSS
+                echo "<td>" . htmlspecialchars($c->getDomain()) . "</td>";
+                echo "<td>" . htmlspecialchars($c->getCmsUsername()) . "</td>";
+                echo "<td>" . htmlspecialchars($c->getCmsPassword()) . "</td>";
+                echo "<td>";
+                echo "<a class='btn btn-info' href='view.php?id=" . $c->getId() . "'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                echo "&nbsp;";
+                echo "<a class='btn btn-info' href='update.php?id=" . $c->getId() . "'><span class='glyphicon glyphicon-pencil'></span></a>";
+                echo "&nbsp;";
+                echo "<a class='btn btn-info' href='delete.php?id=" . $c->getId() . "'><span class='glyphicon glyphicon-remove'></span></a>";
+                echo "&nbsp;";
+                echo "</td>";
+                echo "</tr>";
+            }
+            ?>
             </tbody>
         </table>
     </div>
