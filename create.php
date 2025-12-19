@@ -14,9 +14,6 @@ if(!empty($_POST)) {
         header("Location: view.php?id=" . $c->getId());
         exit();
     }
-} else {
-    // Formular wurde abgeschickt
-
 }
 
 

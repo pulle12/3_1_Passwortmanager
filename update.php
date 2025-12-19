@@ -1,3 +1,34 @@
+<?php
+
+require_once 'models/Credentials.php';
+
+if(empty($_GET['id'])) {
+    header('Location: index.php');
+    exit();
+} else {
+    $c = Credentials::get($_GET['id']);
+}
+
+if($c == null) {
+    http_response_code(404);
+    die();
+}
+
+if(!empty($_POST)) {
+    $c->setName(isset($_POST['name']) ? $_POST['name'] : '');
+    $c->setDomain(isset($_POST['domain']) ? $_POST['domain'] : '');
+    $c->setCmsUsername(isset($_POST['cms_username']) ? $_POST['cms_username'] : '');
+    $c->setCmsPassword(isset($_POST['cms_password']) ? $_POST['cms_password'] : '');
+
+    if($c->save()) {
+        header("Location: view.php?id=" . $c->getId());
+        exit();
+    }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -18,14 +49,17 @@
         <h2>Zugangsdaten bearbeiten</h2>
     </div>
 
-    <form class="form-horizontal" action="update.php?id=29" method="post">
+    <form class="form-horizontal" action="update.php?id=<?= $c->getId() ?>" method="post">
 
         <div class="row">
             <div class="col-md-5">
                 <div class="form-group required ">
                     <label class="control-label">Name *</label>
                     <input type="text" class="form-control" name="name" maxlength="32"
-                           value="Agivu">
+                           value="<?= htmlspecialchars($c->getName()) ?>">
+                    <?php if (!empty($c->getErrors()['name'])): ?>
+                        <div class="help-block"><?= $c-getErrors()['name'] ?></div>
+                    <?php endif; ?>
 
                 </div>
             </div>
@@ -34,7 +68,10 @@
                 <div class="form-group required ">
                     <label class="control-label">Domäne *</label>
                     <input type="text" class="form-control" name="domain" maxlength="128"
-                           value="opera.com">
+                           value="<?= htmlspecialchars($c->getDomain()) ?>">
+                    <?php if (!empty($c->getErrors()['domain'])): ?>
+                        <div class="help-block"><?= $c-getErrors()['domain'] ?></div>
+                    <?php endif; ?>
 
                 </div>
             </div>
@@ -45,7 +82,10 @@
                 <div class="form-group required ">
                     <label class="control-label">CMS-Benutzername *</label>
                     <input type="text" class="form-control" name="cms_username" maxlength="64"
-                           value="mguittes">
+                           value="<?= htmlspecialchars($c->getCmsUsername()) ?>">
+                    <?php if (!empty($c->getErrors()['cms_username'])): ?>
+                        <div class="help-block"><?= $c-getErrors()['cms_username'] ?></div>
+                    <?php endif; ?>
 
                 </div>
             </div>
@@ -54,7 +94,10 @@
                 <div class="form-group required ">
                     <label class="control-label">CMS-Passwort *</label>
                     <input type="text" class="form-control" name="cms_password" maxlength="64"
-                           value="oXPreXz">
+                           value="<?= htmlspecialchars($c->getCmsPassword()) ?>">
+                    <?php if (!empty($c->getErrors()['cms_password'])): ?>
+                        <div class="help-block"><?= $c-getErrors()['cms_password'] ?></div>
+                    <?php endif; ?>
 
                 </div>
             </div>
