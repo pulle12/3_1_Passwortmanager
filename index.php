@@ -49,7 +49,6 @@
                 echo "<a class='btn btn-info' href='update.php?id=" . $c->getId() . "'><span class='glyphicon glyphicon-pencil'></span></a>";
                 echo "&nbsp;";
                 echo "<a class='btn btn-info' href='delete.php?id=" . $c->getId() . "'><span class='glyphicon glyphicon-remove'></span></a>";
-                echo "&nbsp;";
                 echo "</td>";
                 echo "</tr>";
             }

@@ -14,8 +14,6 @@ if($c == null) {
     die();
 }
 
-print_r($c);
-
 ?>
 
 <!DOCTYPE html>
