@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8">
-    <title>Passwortmanager</title>
-
-    <link rel="shortcut icon" href="css/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="css/favicon.ico" type="image/x-icon">
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</head>
-<body>
 <div class="container">
     <div class="row">
         <h2>Passwortmanager</h2>
@@ -33,11 +19,8 @@
             </thead>
             <tbody>
             <?php
-            require_once 'models/Credentials.php';
 
-            $credentials = Credentials::getAll();
-
-            foreach ($credentials as $c) {
+            foreach ($model as $c) {
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($c->getName()) . "</td>"; //htmlspecialchars im Video nicht verwendet aber wichtig gegen XSS
                 echo "<td>" . htmlspecialchars($c->getDomain()) . "</td>";
@@ -57,5 +40,3 @@
         </table>
     </div>
 </div> <!-- /container -->
-</body>
-</html>

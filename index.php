@@ -11,8 +11,11 @@ $controller = sizeof($route) > 0 ? $route[0] : 'credentials';
 if($controller == 'credentials'){
 
     require_once("controller/CredentialsController.php");
-    (new CredentialsController()->handleRequest($route));
-    
+    //
+    //
+    $ctrl = new CredentialsController();
+    $ctrl->handleRequest($route);
+
 } else {
     Controller::showError("Page not found", "Page for operation " . $controller . " was not found!", 404);
 }
