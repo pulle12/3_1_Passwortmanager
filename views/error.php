@@ -13,6 +13,7 @@
     <script src="../js/index.php"></script>
 </head>
 <body>
-
+<h1><?php print htmlentities($title) ?></h1>
+<p><?php print htmlentities($message) ?></p>
 </body>
 </html>

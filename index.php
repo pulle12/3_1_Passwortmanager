@@ -14,6 +14,6 @@ if($controller == 'credentials'){
     Controller::showError("Page not found", "Page for operation " . $controller . " was not found!", 404);
 }
 
-$action = sizeof($route) > 1 ? $route[1] : 'index';
+
 
 
