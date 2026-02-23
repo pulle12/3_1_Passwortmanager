@@ -16,18 +16,20 @@ class Credentials implements DatabaseObject
     {
     }
 
-    public function validate() {
+    public function validate()
+    {
         return $this->validateHelper('Name', 'name', $this->name, 32) &
-               $this->validateHelper('Domäne', 'domain', $this->domain, 128) &
-               $this->validateHelper('CMS-Benutzername', 'cms_username', $this->cms_username, 64) &
-               $this->validateHelper('CMS-Passwort', 'cms_password', $this->cms_password, 64);
+            $this->validateHelper('Domäne', 'domain', $this->domain, 128) &
+            $this->validateHelper('CMS-Benutzername', 'cms_username', $this->cms_username, 64) &
+            $this->validateHelper('CMS-Passwort', 'cms_password', $this->cms_password, 64);
     }
 
-    private function validateHelper($label, $key, $value, $maxLength) {
-        if(strlen($value) == 0) {
+    private function validateHelper($label, $key, $value, $maxLength)
+    {
+        if (strlen($value) == 0) {
             $this->errors[$key] = "$label darf nicht leer sein.";
             return false;
-        } else if(strlen($value) > $maxLength) {
+        } else if (strlen($value) > $maxLength) {
             $this->errors[$key] = "$label zu lang (max. $maxLength Zeichen)";
             return false;
         } else {
@@ -35,10 +37,11 @@ class Credentials implements DatabaseObject
         }
     }
 
-    public function save() {
-        if($this->validate()) {
+    public function save()
+    {
+        if ($this->validate()) {
 
-            if($this->getId() != null && $this->getId() > 0) {
+            if ($this->getId() != null && $this->getId() > 0) {
                 $this->update();
             } else {
                 $this->setId($this->create());
@@ -174,7 +177,7 @@ class Credentials implements DatabaseObject
         $db = Database::connect();
         $stmt = $db->prepare($sql);
         $stmt->execute();
-        $items = $stmt->fetchAll(PDO::FETCH_CLASS,'Credentials'); // hier wird automatisiert, dass objektrelationale Mapping wird + Verwendung einer Hilfsmethode von PDO
+        $items = $stmt->fetchAll(PDO::FETCH_CLASS, 'Credentials'); // hier wird automatisiert, dass objektrelationale Mapping wird + Verwendung einer Hilfsmethode von PDO
         Database::disconnect();
         return $items !== false ? $items : null;
     }

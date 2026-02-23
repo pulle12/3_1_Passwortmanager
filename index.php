@@ -11,8 +11,6 @@ $controller = sizeof($route) > 0 ? $route[0] : 'credentials';
 if($controller == 'credentials'){
 
     require_once("controller/CredentialsController.php");
-    //
-    //
     $ctrl = new CredentialsController();
     $ctrl->handleRequest($route);
 

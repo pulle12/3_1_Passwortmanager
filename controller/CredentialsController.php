@@ -68,7 +68,7 @@ class CredentialsController extends Controller
             if($model->save()) {
                 $this->redirect('credentials/index');
                 return;
-            }
+            } // Video 3.1 MVC stehengeblieben bei 31:28 (-5:46)
         }
 
         $this->render('credentials/create', $model);
