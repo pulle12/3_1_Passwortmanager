@@ -34,6 +34,7 @@ class CredentialsController extends Controller
     private function actionIndex()
     {
         $model = Credentials::getAll();
+        $this->render('credentials/index', $model);
     }
 
     private function actionView(mixed $id)
