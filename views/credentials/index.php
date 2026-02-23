@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h2>Passwortmanager</h2>
+        <h2>Passwortmanager 2.0</h2>
     </div>
     <div class="row">
         <p>
@@ -27,11 +27,11 @@
                 echo "<td>" . htmlspecialchars($c->getCmsUsername()) . "</td>";
                 echo "<td>" . htmlspecialchars($c->getCmsPassword()) . "</td>";
                 echo "<td>";
-                echo "<a class='btn btn-info' href='view.php?id=" . $c->getId() . "'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                echo "<a class='btn btn-info' href='index.php?r=credentials/view&id=" . $c->getId() . "'><span class='glyphicon glyphicon-eye-open'></span></a>";
                 echo "&nbsp;";
-                echo "<a class='btn btn-info' href='update.php?id=" . $c->getId() . "'><span class='glyphicon glyphicon-pencil'></span></a>";
+                echo "<a class='btn btn-primary' href='index.php?r=credentials/update&id=" . $c->getId() . "'><span class='glyphicon glyphicon-pencil'></span></a>";
                 echo "&nbsp;";
-                echo "<a class='btn btn-info' href='delete.php?id=" . $c->getId() . "'><span class='glyphicon glyphicon-remove'></span></a>";
+                echo "<a class='btn btn-danger' href='index.php?r=credentials/delete&id=" . $c->getId() . "'><span class='glyphicon glyphicon-remove'></span></a>";
                 echo "</td>";
                 echo "</tr>";
             }

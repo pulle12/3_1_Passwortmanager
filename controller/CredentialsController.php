@@ -39,6 +39,12 @@ class CredentialsController extends Controller
 
     private function actionView(mixed $id)
     {
+        $model = Credentials::get($id);
+        if($model == null) {
+            Controller::showError("Page not  found", "Credentials with id $id was not found!", 404);
+        } else {
+            $this->render('credentials/view', $model);
+        }
     }
 
     private function actionUpdate(mixed $id)
