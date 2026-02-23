@@ -60,7 +60,15 @@ class CredentialsController extends Controller
         $model = new Credentials();
 
         if(!empty($_POST)) {
+            $model->setName($this->getDataOrNull('name'));
+            $model->setDomain($this->getDataOrNull('domain'));
+            $model->setCmsUsername($this->getDataOrNull('cms_username'));
+            $model->setCmsPassword($this->getDataOrNull('cms_password'));
 
+            if($model->save()) {
+                $this->redirect('credentials/index');
+                return;
+            }
         }
 
         $this->render('credentials/create', $model);
