@@ -4,7 +4,7 @@
     </div>
     <div class="row">
         <p>
-            <a href="create.php" class="btn btn-success">Erstellen <span class="glyphicon glyphicon-plus"></span></a>
+            <a href="index.php?r=credentials/create" class="btn btn-success">Erstellen <span class="glyphicon glyphicon-plus"></span></a>
         </p>
 
         <table class="table table-striped table-bordered">

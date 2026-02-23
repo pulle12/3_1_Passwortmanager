@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="col-md-5">
-                <div class="form-group required ">
+                <div class="form-group required <?php echo !empty($model->getErrors()['name']) ? 'has-error' : '' ?>">
                     <label class="control-label">Name *</label>
                     <input type="text" class="form-control" name="name" maxlength="32"
                            value="<?= htmlspecialchars($model->getName()) ?>">
@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-5">
-                <div class="form-group required ">
+                <div class="form-group required  <?php echo !empty($model->getErrors()['domain']) ? 'has-error' : '' ?>">
                     <label class="control-label">Domäne *</label>
                     <input type="text" class="form-control" name="domain" maxlength="128"
                            value="<?= htmlspecialchars($model->getDomain()) ?>">
@@ -33,7 +33,7 @@
 
         <div class="row">
             <div class="col-md-5">
-                <div class="form-group required ">
+                <div class="form-group required <?php echo !empty($model->getErrors()['cms_username']) ? 'has-error' : '' ?>">
                     <label class="control-label">CMS-Benutzername *</label>
                     <input type="text" class="form-control" name="cms_username" maxlength="64"
                            value="<?= htmlspecialchars($model->getCmsUsername()) ?>">
@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-5">
-                <div class="form-group required ">
+                <div class="form-group required <?php echo !empty($model->getErrors()['password']) ? 'has-error' : '' ?>">
                     <label class="control-label">CMS-Passwort *</label>
                     <input type="text" class="form-control" name="cms_password" maxlength="64"
                            value="<?= htmlspecialchars($model->getCmsPassword()) ?>">
