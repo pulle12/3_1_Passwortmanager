@@ -1,44 +1,9 @@
-<?php
-
-require_once 'models/Credentials.php';
-
-$model = new Credentials();
-
-if(!empty($_POST)) {
-    $model->setName(isset($_POST['name']) ? $_POST['name'] : '');
-    $model->setDomain(isset($_POST['domain']) ? $_POST['domain'] : '');
-    $model->setCmsUsername(isset($_POST['cms_username']) ? $_POST['cms_username'] : '');
-    $model->setCmsPassword(isset($_POST['cms_password']) ? $_POST['cms_password'] : '');
-
-    if($model->save()) {
-        header("Location: view.php?id=" . $model->getId());
-        exit();
-    }
-}
-
-
-?>
-
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8">
-    <title>Passwortmanager</title>
-
-    <link rel="shortcut icon" href="/php/3_1_Passwortmanager/css/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/php/3_1_Passwortmanager/css/favicon.ico" type="image/x-icon">
-
-    <link href="/php/3_1_Passwortmanager/css/bootstrap.css" rel="stylesheet">
-    <script src="/php/3_1_Passwortmanager/js/jquery.min.js"></script>
-    <script src="/php/3_1_Passwortmanager/js/bootstrap.min.js"></script>
-</head>
-<body>
 <div class="container">
     <div class="row">
         <h2>Zugangsdaten erstellen</h2>
     </div>
 
-    <form class="form-horizontal" action="create.php" method="post">
+    <form class="form-horizontal" action="index.php?r=credentials/create" method="post">
 
         <div class="row">
             <div class="col-md-5">
@@ -98,6 +63,4 @@ if(!empty($_POST)) {
         </div>
     </form>
 
-</div> <!-- /container -->
-</body>
-</html>
+</div>

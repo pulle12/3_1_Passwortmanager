@@ -57,5 +57,12 @@ class CredentialsController extends Controller
 
     private function actionCreate()
     {
+        $model = new Credentials();
+
+        if(!empty($_POST)) {
+
+        }
+
+        $this->render('credentials/create', $model);
     }
 }
