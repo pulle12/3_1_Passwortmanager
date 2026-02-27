@@ -1,49 +1,3 @@
-<?php
-
-require_once 'models/Credentials.php';
-
-if(empty($_GET['id'])) {
-    header('Location: index.php');
-    exit();
-} else {
-    $c = Credentials::get($_GET['id']);
-}
-
-if($c == null) {
-    http_response_code(404);
-    die();
-}
-
-if(!empty($_POST)) {
-    $c->setName(isset($_POST['name']) ? $_POST['name'] : '');
-    $c->setDomain(isset($_POST['domain']) ? $_POST['domain'] : '');
-    $c->setCmsUsername(isset($_POST['cms_username']) ? $_POST['cms_username'] : '');
-    $c->setCmsPassword(isset($_POST['cms_password']) ? $_POST['cms_password'] : '');
-
-    if($c->save()) {
-        header("Location: view.php?id=" . $c->getId());
-        exit();
-    }
-}
-
-
-?>
-
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8">
-    <title>Passwortmanager</title>
-
-    <link rel="shortcut icon" href="css/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="css/favicon.ico" type="image/x-icon">
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</head>
-
-<body>
 <div class="container">
     <div class="row">
         <h2>Zugangsdaten bearbeiten</h2>
@@ -110,5 +64,3 @@ if(!empty($_POST)) {
     </form>
 
 </div> <!-- /container -->
-</body>
-</html>
