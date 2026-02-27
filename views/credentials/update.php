@@ -3,7 +3,7 @@
         <h2>Zugangsdaten bearbeiten</h2>
     </div>
 
-    <form class="form-horizontal" action="update.php?id=<?= $model->getId() ?>" method="post">
+    <form class="form-horizontal" action="index.php?r=credentials/update&id=<?= $model->getId() ?>" method="post">
 
         <div class="row">
             <div class="col-md-5">
