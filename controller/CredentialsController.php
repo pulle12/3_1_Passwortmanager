@@ -31,13 +31,13 @@ class CredentialsController extends Controller
         }
     }
 
-    private function actionIndex()
+    public function actionIndex()
     {
         $model = Credentials::getAll();
         $this->render('credentials/index', $model);
     }
 
-    private function actionView(mixed $id)
+    public function actionView(mixed $id)
     {
         $model = Credentials::get($id);
         if($model == null) {
@@ -47,15 +47,17 @@ class CredentialsController extends Controller
         }
     }
 
-    private function actionUpdate(mixed $id)
+    public function actionUpdate(mixed $id)
+    {
+        $model = Credentials::get($id);
+
+    }
+
+    public function actionDelete(mixed $id)
     {
     }
 
-    private function actionDelete(mixed $id)
-    {
-    }
-
-    private function actionCreate()
+    public function actionCreate()
     {
         $model = new Credentials();
 
@@ -68,7 +70,7 @@ class CredentialsController extends Controller
             if($model->save()) {
                 $this->redirect('credentials/index');
                 return;
-            } // Video 3.1 MVC stehengeblieben bei 31:28 (-5:46)
+            }
         }
 
         $this->render('credentials/create', $model);
