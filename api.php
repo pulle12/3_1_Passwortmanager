@@ -1,6 +1,6 @@
 <?php
 
-require_once('controllers/RESTController.php');
+require_once(__DIR__ . '/controller/RESTController.php');
 
 // entry point for the rest api
 // e.g. GET http://localhost/php41/api.php?r=credentials/25
@@ -10,7 +10,7 @@ $route = isset($_GET['r']) ? explode('/', trim($_GET['r'], '/')) : ['credentials
 $controller = sizeof($route) > 0 ? $route[0] : 'credentials';
 
 if ($controller == 'credentials') {
-    require_once('controllers/CredentialsRESTController.php');
+    require_once(__DIR__ . '/controller/CredentialsRESTController.php');
 
     try {
         (new CredentialsRESTController())->handleRequest();

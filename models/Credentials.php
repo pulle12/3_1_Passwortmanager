@@ -2,7 +2,7 @@
 
 require_once 'DatabaseObject.php';
 
-class Credentials implements DatabaseObject
+class Credentials implements DatabaseObject, JsonSerializable
 {
     private $id = 0;
     private $name = '';
@@ -14,6 +14,30 @@ class Credentials implements DatabaseObject
 
     public function __construct()
     {
+    }
+
+    /**
+     * Magic method to allow PDO to set private properties
+     */
+    public function __set($name, $value)
+    {
+        if (property_exists($this, $name)) {
+            $this->$name = $value;
+        }
+    }
+
+    /**
+     * Implement JsonSerializable to allow json_encode to serialize private properties
+     */
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'domain' => $this->domain,
+            'cms_username' => $this->cms_username,
+            'cms_password' => $this->cms_password
+        ];
     }
 
     public function validate()

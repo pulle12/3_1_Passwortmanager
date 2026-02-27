@@ -26,4 +26,12 @@ class CredentialsRESTController extends RESTController
 
         }
     }
+
+    public function handleGETRequest()
+    {
+        if($this->verb == null && sizeof($this->args) == 0) {
+            $model = Credentials::getAll();
+            $this->response($model);
+        }
+    }
 }
