@@ -7,6 +7,23 @@ class CredentialsRESTController extends RESTController
 
     public function handleRequest()
     {
-        // TODO: Implement handleRequest() method.
+        switch($this->method) {
+            case 'GET':
+                $this->handleGETRequest();
+                break;
+            case 'POST':
+                $this->handlePOSTRequest();
+                break;
+            case 'PUT':
+                $this->handlePUTRequest();
+                break;
+            case 'DELETE':
+                $this->handleDELETERequest();
+                break;
+            default:
+                $this->response('Method Not Allowed', 405);
+                break;
+
+        }
     }
 }
