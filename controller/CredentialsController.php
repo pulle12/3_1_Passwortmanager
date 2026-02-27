@@ -72,6 +72,19 @@ class CredentialsController extends Controller
 
     public function actionDelete(mixed $id)
     {
+        $model = Credentials::get($id);
+
+        if($model == null) {
+            Controller::showError("Page not  found", "Credentials with id $id was not found!", 404);
+        } else {
+            if(!empty($_POST)) {
+                Credentials::delete($id);
+                $this->redirect('credentials/index');
+                return;
+            }
+
+            $this->render('credentials/delete', $model);
+        }
     }
 
     public function actionCreate()
