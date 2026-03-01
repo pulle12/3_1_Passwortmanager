@@ -50,4 +50,19 @@ class CredentialsRESTController extends RESTController
             $this->response('Bad request', 400);
         }
     }
+
+    public function handlePOSTRequest()
+    {
+        $model = new Credentials();
+        $model->setName($this->getDataOrNull('name'));
+        $model->setDomain($this->getDataOrNull('domain'));
+        $model->setCmsUsername($this->getDataOrNull('cms_username'));
+        $model->setCmsPassword($this->getDataOrNull('cms_password'));
+
+        if($model->save()) {
+            $this->response("Created", 201);
+        } else {
+            $this->response($model->getErrors(), 400);
+        }
+    }
 }
