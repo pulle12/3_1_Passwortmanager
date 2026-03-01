@@ -10,5 +10,6 @@
     <link href="/php/3_1_Passwortmanager/css/bootstrap.css" rel="stylesheet">
     <script src="/php/3_1_Passwortmanager/js/jquery.min.js"></script>
     <script src="/php/3_1_Passwortmanager/js/bootstrap.min.js"></script>
+    <script src="/php/3_1_Passwortmanager/js/index.js"></script>
 </head>
 <body>
