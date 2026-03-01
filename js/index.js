@@ -7,6 +7,12 @@ $(document).ready(function() {
         $("#filter").val("");
         loadAllCredentials();
     });
+
+    $('#filter').keypress(function(e) {
+        if(e.which == 13) {
+            loadFilteredCredentials();
+        }
+    });
 });
 
 function parseCredentialsTable() {
