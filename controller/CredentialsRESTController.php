@@ -65,4 +65,24 @@ class CredentialsRESTController extends RESTController
             $this->response($model->getErrors(), 400);
         }
     }
+
+    public function handlePUTRequest()
+    {
+        if($this->verb == null && sizeof($this->args) == 1) {
+
+            $model = Credentials::get($this->args[0]);
+            $model->setName($this->getDataOrNull('name'));
+            $model->setDomain($this->getDataOrNull('domain'));
+            $model->setCmsUsername($this->getDataOrNull('cms_username'));
+            $model->setCmsPassword($this->getDataOrNull('cms_password'));
+
+            if ($model->save()) {
+                $this->response("OK");
+            } else {
+                $this->response($model->getErrors(), 400);
+            }
+        } else {
+            $this->response('Not found', 404);
+        }
+    }
 }
