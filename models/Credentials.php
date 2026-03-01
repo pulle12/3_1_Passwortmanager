@@ -195,13 +195,23 @@ class Credentials implements DatabaseObject, JsonSerializable
         return $item !== false ? $item : null;
     }
 
-    public static function getAll()
+    public static function getAll($filter = null) //Standardwert für Filter festlegen
     {
-        $sql = "SELECT * FROM credentials ORDER BY name ASC, domain ASC";
         $db = Database::connect();
+
+        if($filter != null) {
+            $sql = "SELECT * FROM credentials WHERE name LIKE ? OR domain LIKE ? ORDER BY name ASC, domain ASC";
+        } else {
+            $sql = "SELECT * FROM credentials ORDER BY name ASC, domain ASC";
+        }
         $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $items = $stmt->fetchAll(PDO::FETCH_CLASS, 'Credentials'); // hier wird automatisiert, dass objektrelationale Mapping wird + Verwendung einer Hilfsmethode von PDO
+        if($filter != null) { //wenn ein Filter vorhanden ist, wird dieser in das Prepared Statement eingebunden, ansonsten wird das Statement ohne Parameter ausgeführt
+            $stmt->execute(array('%' . $filter . '%', '%' . $filter . '%'));
+        } else {
+            $stmt->execute();
+
+        }
+        $items = $stmt->fetchAll(PDO::FETCH_CLASS, 'Credentials'); // hier wird automatisiert, dass objektrelationales Mapping (ORM) wird + Verwendung einer Hilfsmethode von PDO
         Database::disconnect();
         return $items !== false ? $items : null;
     }
