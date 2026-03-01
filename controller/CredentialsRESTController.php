@@ -85,4 +85,13 @@ class CredentialsRESTController extends RESTController
             $this->response('Not found', 404);
         }
     }
+
+    public function handleDELETERequest() {
+        if($this->verb == null && sizeof($this->args) == 1) {
+            Credentials::delete($this->args[0]);
+            $this->response("OK");
+        } else {
+            $this->response('Not found', 404);
+        }
+    }
 }
