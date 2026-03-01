@@ -60,7 +60,7 @@ class CredentialsRESTController extends RESTController
         $model->setCmsPassword($this->getDataOrNull('cms_password'));
 
         if($model->save()) {
-            $this->response("Created", 201);
+            $this->response('Credentials with id ' . $model->getId() . ' created', 201);
         } else {
             $this->response($model->getErrors(), 400);
         }
@@ -71,7 +71,6 @@ class CredentialsRESTController extends RESTController
         if($this->verb == null && sizeof($this->args) == 1) {
 
             $model = Credentials::get($this->args[0]);
-            $model = Credentials::get($this->args[0]);
             if($model == null) {
                 $this->response('Credentials with id ' . $this->args[0] . ' not found', 404);
             } else {
@@ -81,7 +80,7 @@ class CredentialsRESTController extends RESTController
                 $model->setCmsPassword($this->getDataOrNull('cms_password'));
 
                 if ($model->save()) {
-                    $this->response("OK");
+                    $this->response('Credentials with id ' . $model->getId() . ' updated');
                 } else {
                     $this->response($model->getErrors(), 400);
                 }
@@ -98,7 +97,7 @@ class CredentialsRESTController extends RESTController
                 $this->response('Credentials with id ' . $this->args[0] . ' not found', 404);
             } else {
                 Credentials::delete($this->args[0]);
-                $this->response("OK");
+                $this->response('Credentials with id ' . $this->args[0] . ' deleted');
             }
         } else {
             $this->response('Not found', 404);
