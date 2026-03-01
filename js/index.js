@@ -1,4 +1,13 @@
+$(document).ready(function() {
+    $('#btnSearch').click(function() {
+        loadFilteredCredentials();
+    });
 
+    $('#btnClear').click(function() {
+        $("#filter").val("");
+        loadAllCredentials();
+    });
+});
 
 function parseCredentialsTable() {
 
