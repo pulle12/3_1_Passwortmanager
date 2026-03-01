@@ -32,6 +32,22 @@ class CredentialsRESTController extends RESTController
         if($this->verb == null && sizeof($this->args) == 0) {
             $model = Credentials::getAll();
             $this->response($model);
+        } else if($this->verb == null && sizeof($this->args) == 1) {
+            $model = Credentials::get($this->args[0]);
+            if($model == null) {
+                $this->response('Credentials with id ' . $this->args[0] . ' not found', 404);
+            } else {
+                $this->response($model);
+            }
+        } else if($this->verb == 'search' && sizeof($this->args) == 1) {
+            $model = Credentials::getAll($this->args[0]);
+            if($model == null) {
+                $this->response('No credentials found for search term ' . $this->args[0], 404);
+            } else {
+                $this->response($model);
+            }
+        } else {
+            $this->response('Bad request', 400);
         }
     }
 }
