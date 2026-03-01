@@ -22,25 +22,7 @@
                 <th></th>
             </tr>
             </thead>
-            <tbody>
-            <?php
-
-            foreach ($model as $c) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars($c->getName()) . "</td>"; //htmlspecialchars im Video nicht verwendet aber wichtig gegen XSS
-                echo "<td>" . htmlspecialchars($c->getDomain()) . "</td>";
-                echo "<td>" . htmlspecialchars($c->getCmsUsername()) . "</td>";
-                echo "<td>" . htmlspecialchars($c->getCmsPassword()) . "</td>";
-                echo "<td>";
-                echo "<a class='btn btn-info' href='index.php?r=credentials/view&id=" . $c->getId() . "'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                echo "&nbsp;";
-                echo "<a class='btn btn-primary' href='index.php?r=credentials/update&id=" . $c->getId() . "'><span class='glyphicon glyphicon-pencil'></span></a>";
-                echo "&nbsp;";
-                echo "<a class='btn btn-danger' href='index.php?r=credentials/delete&id=" . $c->getId() . "'><span class='glyphicon glyphicon-remove'></span></a>";
-                echo "</td>";
-                echo "</tr>";
-            }
-            ?>
+            <tbody id="credentials">
             </tbody>
         </table>
     </div>
