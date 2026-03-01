@@ -71,15 +71,20 @@ class CredentialsRESTController extends RESTController
         if($this->verb == null && sizeof($this->args) == 1) {
 
             $model = Credentials::get($this->args[0]);
-            $model->setName($this->getDataOrNull('name'));
-            $model->setDomain($this->getDataOrNull('domain'));
-            $model->setCmsUsername($this->getDataOrNull('cms_username'));
-            $model->setCmsPassword($this->getDataOrNull('cms_password'));
-
-            if ($model->save()) {
-                $this->response("OK");
+            $model = Credentials::get($this->args[0]);
+            if($model == null) {
+                $this->response('Credentials with id ' . $this->args[0] . ' not found', 404);
             } else {
-                $this->response($model->getErrors(), 400);
+                $model->setName($this->getDataOrNull('name'));
+                $model->setDomain($this->getDataOrNull('domain'));
+                $model->setCmsUsername($this->getDataOrNull('cms_username'));
+                $model->setCmsPassword($this->getDataOrNull('cms_password'));
+
+                if ($model->save()) {
+                    $this->response("OK");
+                } else {
+                    $this->response($model->getErrors(), 400);
+                }
             }
         } else {
             $this->response('Not found', 404);
@@ -88,8 +93,13 @@ class CredentialsRESTController extends RESTController
 
     public function handleDELETERequest() {
         if($this->verb == null && sizeof($this->args) == 1) {
-            Credentials::delete($this->args[0]);
-            $this->response("OK");
+            $model = Credentials::get($this->args[0]);
+            if($model == null) {
+                $this->response('Credentials with id ' . $this->args[0] . ' not found', 404);
+            } else {
+                Credentials::delete($this->args[0]);
+                $this->response("OK");
+            }
         } else {
             $this->response('Not found', 404);
         }
